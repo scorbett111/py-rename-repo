@@ -1,0 +1,53 @@
+{
+    "sync": {
+        "targets": {
+            "to_location": {
+                "map": "remote_name",
+                "default": "origin"
+            }
+        },
+        "options": {
+            "branch": {
+                "short_flag": "-b",
+                "long_flag": "--branch",
+                "map": "remote_branch",
+                "default": "main"
+            },
+            "message": {
+                "short_flag": "-m",
+                "long_flag": "--message",
+                "required": true,
+                "map": "commit_message"
+            },
+            "files": {
+                "short_flag": "-f",
+                "long_flag": "--files",
+                "required": false,
+                "map": "files"
+            }
+        },
+        "commands": [
+            {
+                "name": "add",
+                "options": [
+                    "files"
+                ]
+            },
+            {
+                "name": "commit",
+                "options": [
+                    "message"
+                ]
+            },
+            {
+                "name": "push",
+                "targets": [
+                    "to_location"
+                ],
+                "options": [
+                    "branch"
+                ]
+            }
+        ]
+    }
+}
