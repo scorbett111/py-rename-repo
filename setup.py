@@ -1,4 +1,5 @@
 import os
+import glob
 from setuptools import (
     setup,
     find_packages
@@ -19,7 +20,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/scorbett111/py-rename-repo",
     data_files=[
-        ('config', ['config/recipies.json'])
+        ('config', glob.glob('config/*', recursive=True))
     ],
     packages=find_packages(),
     classifiers=[

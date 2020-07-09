@@ -64,7 +64,7 @@ class LocalRepository:
             self._repo.index.add(files)
         
         else:
-            self._repo.index.add(self.repo_path)
+            self._repo.index.add(self._repo.untracked_files)
 
         return self
 
