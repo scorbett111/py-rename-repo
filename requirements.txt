@@ -1,0 +1,9 @@
+
+cryptography
+PyGitHub
+python-gitlab
+bitbucket-python
+python-dotenv
+ConfigArgParse
+pytest
+gitpython

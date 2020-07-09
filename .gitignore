@@ -1,0 +1,9 @@
+.py-rename-repo
+.vscode
+__pycache__
+.env
+build/
+dist/
+*.egg
+.pytest_cache
+*.egg-info
