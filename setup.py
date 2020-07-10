@@ -7,12 +7,14 @@ from setuptools import (
 
 current_directory = os.path.abspath(os.path.dirname(__file__))
 
+print()
+
 with open(os.path.join(current_directory, 'README.md'), "r") as readme:
     package_description = readme.read()
 
 setup(
     name="py-gcmd",
-    version="0.0.3",
+    version="0.0.4",
     author="Sean C.",
     author_email="randomaccess403@gmail.com",
     description="py-rename-repo renames the provided branch for all repositories under a user's Github/Gitlab/Bitbucket account.",
@@ -20,7 +22,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/scorbett111/py-rename-repo",
     data_files=[
-        ('config', glob.glob('config/*', recursive=True))
+        ('config/recipies', glob.glob('config/recipies/*'))
     ],
     packages=find_packages(),
     classifiers=[
