@@ -75,6 +75,7 @@ class LocalRepository:
         return self
 
     def add(self):
+        print('A')
         untracked = self.options.get('untracked')
         files = self.options.get('files')
 
@@ -119,6 +120,7 @@ class LocalRepository:
         return self
 
     def commit(self):
+        print('B')
         self._repo.index.commit(self.options.get('commit_message'))
 
         return self
@@ -134,7 +136,7 @@ class LocalRepository:
         return self
 
     def pull(self):
-        print('EXECUTING')
+        print('C')
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
@@ -145,6 +147,7 @@ class LocalRepository:
         return self
 
     def push(self):
+        print('D')
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
