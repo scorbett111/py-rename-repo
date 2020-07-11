@@ -16,8 +16,12 @@ class OptionGroup:
                     key='options'
                 )
 
-            for option_name, option_value in config.get('options').items():
-                self.options[option_name] = Option(map_field=option_name,value=option_value)
+            for option_name, option_config in config.get('options').items():
+                self.options[option_name] = Option(
+                    map_field=option_name,
+                    value=option_config.get('value'),
+                    hooks=option_config.get('hooks')
+                )
 
     def __iter__(self):
         for option_name in self.options:

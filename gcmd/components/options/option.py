@@ -1,8 +1,9 @@
 class Option:
 
-    def __init__(self, map_field=None, value=None):
+    def __init__(self, map_field=None, value=None, hooks=None):
         self.map = map_field
         self.value = value
+        self.hooks = hooks
 
     def __eq__(self, other):
         return self.value == other

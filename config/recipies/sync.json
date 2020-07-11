@@ -18,7 +18,12 @@
             "short_flag": "-b",
             "long_flag": "--branch",
             "map": "remote_branch",
-            "default": "main"
+            "default": "main",
+            "hooks": {
+                "on_pre": [
+                    "pull"
+                ]
+            }
         },
         "message": {
             "short_flag": "-m",

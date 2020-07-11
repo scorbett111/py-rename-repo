@@ -19,4 +19,18 @@ class Command:
             config=config.get('hooks')
         )
 
+        for target in self.targets:
+            if target.hooks:
+                target.hooks = Hooks(
+                    hooks=hooks,
+                    config=config.get('hooks')
+                )
+
+        for option in self.options:
+            if option.hooks:
+                option.hooks = Hooks(
+                    hooks=hooks,
+                    config=config.get('hooks')
+                )
+
     
