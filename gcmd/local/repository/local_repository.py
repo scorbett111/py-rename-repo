@@ -120,7 +120,7 @@ class LocalRepository:
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
-            self._repo.git.pull(self.remote_name, self.remote_branch)
+            self._remote.pull(self.remote_branch)
         else:
             raise Exception('Error: Remote does not exist or URL is invalid.')
 
@@ -130,7 +130,7 @@ class LocalRepository:
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
-            self._repo.git.push(self.remote_name, self.remote_branch)
+            self._remote.push(self.remote_branch)
         else:
             raise Exception('Error: Remote does not exist or URL is invalid.')
 
