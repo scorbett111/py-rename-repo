@@ -58,12 +58,15 @@ class LocalRepository:
         return self
 
     def add(self):
+        untracked = self.options.get('untracked')
         files = self.options.get('files')
 
-        if files is None:
-            self._repo.git.add(A=True)
-        else:
+        if files:
             self._repo.index.add(files)
+        elif untracked:
+            self._repo.get.add(U=True)
+        else:
+            self._repo.git.add(A=True)
 
         return self
 

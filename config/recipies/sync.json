@@ -31,12 +31,19 @@
             "long_flag": "--files",
             "required": false,
             "map": "files"
+        },
+        "untracked": {
+            "short_flag": "-u",
+            "long_flag": "--untracked",
+            "requied": false,
+            "map": "untracked"
         }
     },
     "commands": {
         "add": {
             "options": [
-                "files"
+                "files",
+                "untracked"
             ]
         },
         "commit": {
