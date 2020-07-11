@@ -65,6 +65,7 @@ class CommandLineInterface:
             options_interface = OptionsInterface(options=list(self.options.values()))
             options_interface.add_arguments()
             option_values = options_interface.parse_arguments()
+            print(option_values)
             
             for option in option_values:
                 option_value = option_values.get(option)
