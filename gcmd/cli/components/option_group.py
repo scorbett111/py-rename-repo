@@ -28,10 +28,10 @@ class OptionGroup:
 
     def get(self, option, default=None):
         result = self.options.get(option)
-        if result:
-            return result.value
+        if result is None:
+            return default
 
-        return default
+        return result.value
 
     def items(self):
         return self.options.values()
