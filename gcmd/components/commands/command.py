@@ -24,11 +24,13 @@ class Command:
                 hooks=hooks,
                 config=target.hooks
             )
+            self.targets.hooks[target.map] = target.hooks
 
         for option in self.options:
             option.hooks = Hooks(
                 hooks=hooks,
                 config=option.hooks
             )
+            self.options.hooks[option.map] = option.hooks
 
     

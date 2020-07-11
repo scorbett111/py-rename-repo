@@ -1,4 +1,7 @@
 from .target import Target
+from gcmd.components.iters import (
+    HooksIter
+)
 from gcmd.components.utils import (
     transform_configs
 )
@@ -7,6 +10,7 @@ class TargetGroup:
 
     def __init__(self, targets=None, config=None, run_setup=True):
         self.targets = {}
+        self.hooks = HooksIter()
 
         if config.get('targets'):
             if targets:

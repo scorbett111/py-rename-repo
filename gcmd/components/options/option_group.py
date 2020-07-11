@@ -1,4 +1,7 @@
 from .option import Option
+from gcmd.components.iters import (
+    HooksIter
+)
 from gcmd.components.utils import (
     transform_configs
 )
@@ -7,6 +10,7 @@ class OptionGroup:
 
     def __init__(self, options=None, config=None):
         self.options = {}
+        self.hooks = HooksIter()
 
         if config.get('options'):
             if options:
