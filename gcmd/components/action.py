@@ -24,13 +24,16 @@ class Action:
 
     def setup(self):
         for command_name in self.config.get('recipe'):
-            self.commands[command_name] = Command(
+            command = Command(
                 name=command_name,
                 config=self.config.get('commands').get(command_name),
                 targets=self.cli.targets,
                 options=self.cli.options,
                 hooks=self.cli.hooks
             )
+            self.commands[command_name] = command
+            self.commands.hooks[command_name] = command.hooks
+            
             
 
 

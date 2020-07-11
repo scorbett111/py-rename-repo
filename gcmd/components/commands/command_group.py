@@ -1,10 +1,14 @@
 from .command import Command
+from gcmd.components.iters import (
+    HooksIter
+)
 
 class CommandGroup:
 
     def __init__(self, commands=None):
 
         self.commands = {}
+        self.hooks = HooksIter()
 
         if commands:
             for command in commands:

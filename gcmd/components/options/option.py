@@ -1,6 +1,7 @@
 class Option:
 
-    def __init__(self, map_field=None, value=None, hooks=None):
+    def __init__(self, name=None, map_field=None, value=None, hooks=None):
+        self.name = name
         self.map = map_field
         self.value = value
         self.hooks = hooks

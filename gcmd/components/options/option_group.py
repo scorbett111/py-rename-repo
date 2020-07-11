@@ -10,6 +10,7 @@ class OptionGroup:
 
     def __init__(self, options=None, config=None):
         self.options = {}
+        self.option_names = {}
         self.hooks = HooksIter()
 
         if config.get('options'):
@@ -20,9 +21,13 @@ class OptionGroup:
                     key='options'
                 )
 
-            for option_name, option_config in config.get('options').items():
-                self.options[option_name] = Option(
-                    map_field=option_name,
+                for option_name, option_config in options.items():
+                    self.option_names[option_config.get('map')] = option_name
+
+            for map_field, option_config in config.get('options').items():
+                self.options[map_field] = Option(
+                    name=self.option_names.get(map_field) or map_field,
+                    map_field=map_field,
                     value=option_config.get('value'),
                     hooks=option_config.get('hooks')
                 )

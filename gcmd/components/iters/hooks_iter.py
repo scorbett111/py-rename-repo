@@ -14,8 +14,14 @@ class HooksIter:
                 for hook in event:
                     yield hook
 
-    def __getitem__(self, item):
-        return self.hooks.get(item)
+    def __getitem__(self, *args):
+        results = self.hooks
+        for arg in args:
+            if results.get(arg):
+                results = results.get(arg)
+            else:
+                results = None
+        return results
 
     def __setitem__(self, item, hooks):
         self.hooks[item] = hooks
