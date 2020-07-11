@@ -9,7 +9,6 @@ def execute_option_hooks(options=None):
             
             command_options = []
             for option in local_repository.options:
-                print(option.value)
                 if option.value is not None:
                     command_options.append(option)
 
@@ -17,6 +16,7 @@ def execute_option_hooks(options=None):
             pre_hooks = []
             for options in command_options:
                 if option.hooks:
+                    print(option.map,option.value)
                     print('AAAA')
                     for event in option.hooks:
                         print(event.event)
