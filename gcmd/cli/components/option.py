@@ -23,6 +23,6 @@ class Option:
         return self.value <= other
 
     def __len__(self):
-        if self.value.__len__:
+        if hasattr(self.value, '__len__'):
             return len(self.value)
         return 0
