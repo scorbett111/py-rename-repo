@@ -15,8 +15,7 @@ class GitCommand:
         for option in self.options:
             if option.hooks and option.hooks['on_pre']:
                 for hook in option.hooks['on_pre']:
-                    print(hook.name)
-                    # self.repo.execute(command=hook.name)
+                    self.repo.execute(command=hook.name)
         
         try:
             self.repo.execute(command=self.command)
