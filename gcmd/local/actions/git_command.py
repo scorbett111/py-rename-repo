@@ -24,6 +24,7 @@ class GitCommand:
 
         if self.hooks.get('on_success'):
             print('EEEEE')
-            # for hook in self.hooks.get('on_success'):
+            for hook in self.hooks.get('on_success'):
+                print(hook.name)
             #     self.repo.execute(command=hook.name)
 
