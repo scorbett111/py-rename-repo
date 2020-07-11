@@ -19,7 +19,8 @@ def execute_option_hooks(options=None):
                     print(option.map,option.value, option.hooks)
                     print('AAAA')
                     for event in option.hooks:
-                        print(event.event)
+                        for hook in event:
+                            print(hook.name)
                         if event.event == 'on_pre':
                             print('EEEE')
                 

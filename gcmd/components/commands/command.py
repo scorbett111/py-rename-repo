@@ -23,14 +23,14 @@ class Command:
             if target.hooks:
                 target.hooks = Hooks(
                     hooks=hooks,
-                    config=config.get('hooks')
+                    config=target.hooks
                 )
 
         for option in self.options:
             if option.hooks:
                 option.hooks = Hooks(
                     hooks=hooks,
-                    config=config.get('hooks')
+                    config=option.hooks
                 )
 
     
