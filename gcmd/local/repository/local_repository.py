@@ -118,6 +118,7 @@ class LocalRepository:
         return self
 
     def pull(self):
+        print('PRE')
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
