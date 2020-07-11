@@ -118,7 +118,7 @@ class LocalRepository:
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
-            self._remote.pull(branch=self.remote_branch)
+            self._remote.pull(self.remote_branch)
         else:
             raise Exception('Error: Remote does not exist or URL is invalid.')
 

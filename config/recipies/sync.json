@@ -6,6 +6,13 @@
             "default": "origin"
         }
     },
+    "hooks": {
+        "pull": {
+            "options": [
+                "branch"
+            ]
+        }
+    },
     "options": {
         "branch": {
             "short_flag": "-b",
@@ -26,27 +33,34 @@
             "map": "files"
         }
     },
-    "commands": [
-        {
-            "name": "add",
+    "commands": {
+        "add": {
             "options": [
                 "files"
             ]
         },
-        {
-            "name": "commit",
+        "commit": {
             "options": [
                 "message"
             ]
         },
-        {
-            "name": "push",
+        "push": {
             "targets": [
                 "to_location"
             ],
             "options": [
                 "branch"
-            ]
+            ],
+            "hooks": {
+                "on_success": [
+                    "pull"
+                ]
+            }
         }
+    },
+    "recipe": [
+        "add",
+        "commit",
+        "push"
     ]
 }

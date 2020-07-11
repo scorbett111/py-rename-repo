@@ -15,6 +15,7 @@ class CommandLineInterface:
         self.action_config = None
         self.targets = None
         self.options = None
+        self.hooks = None
         self.known_flags = []
 
     def parse_action(self):
@@ -23,6 +24,7 @@ class CommandLineInterface:
         self.action_config = self.registry.recipies.get(action_name)
         self.targets = self.action_config.get('targets')
         self.options = self.action_config.get('options')
+        self.hooks = self.action_config.get('hooks')
 
         for option in self.options.values():
             if option.get('short_flag'):
@@ -72,31 +74,4 @@ class CommandLineInterface:
                 self.options[option]['value'] = option_value
 
         return self
-
-    def map_to_commands(self):
-
-        for command in self.action_config.get('commands'):
-            command_targets = command.get('targets')
-            command_options = command.get('options')
-            command_config = {
-                'name': command.get('name'),
-                'options': {}
-            }
-
-            if command_targets:
-                for target in command_targets:
-                    target_config = self.targets.get(target)
-                    command_config['options'][target_config.get('map')] = target_config.get('value')
-
-            if command_options:
-                for option in command_options:
-                    option_config = self.options.get(option)
-                    command_config['options'][option_config.get('map')] = option_config.get('value')
-
-            self.action['commands'].append(command_config)
-        
-        return self.action
-                
-
-        
         
