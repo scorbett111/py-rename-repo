@@ -134,6 +134,7 @@ class LocalRepository:
         return self
 
     def pull(self):
+        print('EXECUTING')
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():
