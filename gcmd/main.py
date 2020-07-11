@@ -2,9 +2,7 @@ import pathlib
 import sys
 from gcmd.cli import CommandLineInterface
 from gcmd.local import LocalRegistry
-from gcmd.cli.components import (
-    Action
-)
+from gcmd.components import Action
 
 
 def run():

@@ -1,5 +1,5 @@
 from .target import Target
-from .utils import (
+from gcmd.components.utils import (
     transform_configs
 )
 

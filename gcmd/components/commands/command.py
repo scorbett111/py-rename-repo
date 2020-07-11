@@ -1,6 +1,6 @@
-from .option_group import OptionGroup
-from .target_group import TargetGroup
-from .hooks import Hooks
+from gcmd.components.options import OptionGroup
+from gcmd.components.targets import TargetGroup
+from gcmd.components.hooks import Hooks
 
 class Command:
     

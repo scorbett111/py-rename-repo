@@ -1,5 +1,5 @@
 from .option import Option
-from .utils import (
+from gcmd.components.utils import (
     transform_configs
 )
 

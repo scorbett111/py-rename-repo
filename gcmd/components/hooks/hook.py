@@ -1,5 +1,5 @@
-from .option_group import OptionGroup
-from .target_group import TargetGroup
+from gcmd.components.options import OptionGroup
+from gcmd.components.targets import TargetGroup
 
 class Hook:
     

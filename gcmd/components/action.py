@@ -1,6 +1,8 @@
-from .command_group import CommandGroup
-from .command import Command
-from .utils import (
+from gcmd.components.commands import (
+    CommandGroup,
+    Command
+)
+from gcmd.components.utils import (
     transform_configs
 )
 
