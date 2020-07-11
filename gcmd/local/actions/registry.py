@@ -30,5 +30,7 @@ class LocalRegistry:
 
     def execute(self, commands=None):
         for command in commands:
-            command = GitCommand(command=command.name, options=command.options)
+            command = GitCommand(
+                command=command
+            )
             command.execute()

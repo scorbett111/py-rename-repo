@@ -20,4 +20,7 @@ class Hooks:
     def __iter__(self):
         for event in self.hooks:
             yield self.hooks.get(event)
+
+    def get(self, event, default=None):
+        return self.hooks.get(event)
     
