@@ -58,6 +58,7 @@ class LocalRepository:
         return self
 
     def add(self):
+        print({**self.options})
         untracked = self.options.get('untracked')
         files = self.options.get('files')
 

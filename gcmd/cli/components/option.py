@@ -1,8 +1,13 @@
+import collections
+
 class Option:
 
     def __init__(self, map_field=None, value=None):
         self.map = map_field
         self.value = value
+
+    def __hash__(self):
+        return hash(self.value)
 
     def __eq__(self, other):
         return self.value == other
@@ -26,3 +31,6 @@ class Option:
         if hasattr(self.value, '__len__'):
             return len(self.value)
         return 0
+
+    def __dict__(self):
+        return {self.map: self.value}
