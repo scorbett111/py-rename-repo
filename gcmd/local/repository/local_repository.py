@@ -131,7 +131,7 @@ class LocalRepository:
 
         return self
 
-    @execute_option_hooks
+    @execute_option_hooks()
     def push(self):
         self._remote = self._repo.remote(name=self.remote_name)
 
