@@ -70,8 +70,7 @@ class CommandLineInterface:
                 option_value = option_values.get(option)
                 if option_value is None:
                     option_value = self.options.get(option).get('default')
-
-                print(option, option_value)
+                    
                 self.options[option]['value'] = option_value
 
         return self
