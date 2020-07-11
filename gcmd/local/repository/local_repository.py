@@ -60,7 +60,7 @@ class LocalRepository:
 
         return self
 
-    @execute_option_hooks
+    @execute_option_hooks(options=['untracked', 'files'])
     def add(self):
         untracked = self.options.get('untracked')
         files = self.options.get('files')
@@ -105,7 +105,7 @@ class LocalRepository:
         )
         return self
 
-    @execute_option_hooks
+    @execute_option_hooks(options=['commit_message'])
     def commit(self):
         self._repo.index.commit(self.options.get('commit_message'))
 

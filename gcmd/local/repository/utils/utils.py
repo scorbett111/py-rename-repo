@@ -1,11 +1,14 @@
 import functools
 
-def execute_option_hooks(func, **kwargs):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        local_repository = args[0]
-        print(local_repository)
+def execute_option_hooks(*args, **kwargs):
 
-        return func(*args, **kwargs)
+    def outer_wrapper(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            local_repository = args[0]
+            print(local_repository)
 
-    return wrapper
+            return func(*args, **kwargs)
+        return wrapper
+
+    return outer_wrapper
