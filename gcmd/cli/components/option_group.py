@@ -1,10 +1,9 @@
-import collections
 from .option import Option
 from .utils import (
     transform_configs
 )
 
-class OptionGroup(collections.Mapping):
+class OptionGroup:
 
     def __init__(self, options=None, config=None):
         self.options = {}
@@ -20,16 +19,9 @@ class OptionGroup(collections.Mapping):
             for option_name, option_value in config.get('options').items():
                 self.options[option_name] = Option(map_field=option_name,value=option_value)
 
-    def __dict__(self):
-        options_dict = {}
-        for option_name, option_value in self.options:
-            options_dict[option_name] = options_dict[option_value]
-
-        return options_dict
-
     def __iter__(self):
         for option_name in self.options:
-            yield option_name
+            yield self.options.get(option_name)
 
     def __getitem__(self, option):
         return self.options.get(option).value
@@ -40,9 +32,6 @@ class OptionGroup(collections.Mapping):
             return default
 
         return result.value
-
-    def __len__(self):
-        return len(self.options)
 
     def items(self):
         return self.options.values()
