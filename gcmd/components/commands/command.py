@@ -20,17 +20,15 @@ class Command:
         )
 
         for target in self.targets:
-            if target.hooks:
-                target.hooks = Hooks(
-                    hooks=hooks,
-                    config=target.hooks
-                )
+            target.hooks = Hooks(
+                hooks=hooks,
+                config=target.hooks
+            )
 
         for option in self.options:
-            if option.hooks:
-                option.hooks = Hooks(
-                    hooks=hooks,
-                    config=option.hooks
-                )
+            option.hooks = Hooks(
+                hooks=hooks,
+                config=option.hooks
+            )
 
     

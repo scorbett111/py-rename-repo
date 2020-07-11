@@ -38,12 +38,28 @@ class LocalRepository:
 
         self.options = options
 
+    def _execute_option_hooks(self, event=None):
+        for option in self.options:
+            if option.value is not None and option.hooks[event]:
+                for hook in option.hooks[event]:
+                    print('PRE')
+                    super(LocalRepository, self).__getattribute__(hook.name)()
+
     def execute(self, command=None):
+
+        self._execute_option_hooks(event='on_pre')
 
         if command is None:
             raise Exception('Error: Command is not specified.')
+        
+        try:
+            return super(LocalRepository, self).__getattribute__(command)()
+        except Exception as execution_failure:
+            self._execute_option_hooks(event='on_failure')
+            raise execution_failure
 
-        return super(LocalRepository, self).__getattribute__(command)()
+        self._execute_option_hooks(event='on_success')
+
 
     def init(self):
 
@@ -118,7 +134,6 @@ class LocalRepository:
         return self
 
     def pull(self):
-        print('PRE')
         self._remote = self._repo.remote(name=self.remote_name)
 
         if self._remote.exists():

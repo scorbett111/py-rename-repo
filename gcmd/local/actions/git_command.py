@@ -11,12 +11,6 @@ class GitCommand:
         self.repo = LocalRepository(options=command.options)
 
     def execute(self, command=None):
-
-        for option in self.options:
-            if option.hooks and option.hooks['on_pre']:
-                for hook in option.hooks['on_pre']:
-                    self.repo.execute(command=hook.name)
-        
         try:
             self.repo.execute(command=self.command)
         
