@@ -14,7 +14,10 @@ def execute_option_hooks(options=None):
                     command_options.append(option)
 
 
-            print(command_options)
+            pre_hooks = []
+            for event in command_options:
+                if event == 'on_pre':
+                    print('EEEE')
                 
             return func(*args, **kwargs)
         
