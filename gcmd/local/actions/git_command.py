@@ -15,6 +15,7 @@ class GitCommand:
             self.repo.execute(command=self.command)
         
         except Exception as execution_failure:
+            print(execution_failure)
             if self.hooks.get('on_failure'):
                 for hook in self.hooks.get('on_failure'):
                     self.repo.execute(command=hook.name)
