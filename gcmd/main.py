@@ -21,17 +21,9 @@ def run():
     )
 
     action.setup()
-
-    for command in action.commands:
-        for event in command.hooks:
-            for hook in event:
-                for target in hook.targets:
-                    print(target.map, target.value)
-                for option in hook.options:
-                    print(option.map, option.value)
-    # registry.execute(
-    #     commands=action.commands
-    # )
+    registry.execute(
+        commands=action.commands
+    )
     # auth = Auth(config=options)
     # service = Service(
     #     service_name=options.get('service')

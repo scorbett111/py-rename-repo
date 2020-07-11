@@ -8,10 +8,10 @@ class LocalRepository:
 
         self.repo_name = options.get(
             'repo_name',
-            os.getcwd().split('/')[-1]
+            default=os.getcwd().split('/')[-1]
         )
-        self.remote_name = options.get('remote_name', 'origin')
-        self.remote_branch = options.get('remote_branch', 'main')
+        self.remote_name = options.get('remote_name', default='origin')
+        self.remote_branch = options.get('remote_branch', default='main')
 
         if options.get('repo_subdirectory'):
             self.repo_path = os.path.join(
@@ -33,7 +33,7 @@ class LocalRepository:
             self._repo = None
             self._branch = None
             self._remote = None
-            self.repo_branch = options.get('repo_branch', 'main') 
+            self.repo_branch = options.get('repo_branch', default='main') 
             self.repo_url = options.get('repo_url')
 
         self.options = options
@@ -60,11 +60,10 @@ class LocalRepository:
     def add(self):
         files = self.options.get('files')
 
-        if files and len(files) > 0:
-            self._repo.index.add(files)
-        
+        if files is None:
+            self._repo.git.add(A=True)
         else:
-            self._repo.index.add(self._repo.untracked_files)
+            self._repo.index.add(files)
 
         return self
 

@@ -24,10 +24,14 @@ class OptionGroup:
             yield self.options.get(option_name)
 
     def __getitem__(self, option):
-        return self.options.get(option)
+        return self.options.get(option).value
 
     def get(self, option, default=None):
-        return self.options.get(option, default)
+        result = self.options.get(option)
+        if result:
+            return result.value
+
+        return default
 
     def items(self):
         return self.options.values()

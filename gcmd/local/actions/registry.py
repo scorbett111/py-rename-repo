@@ -29,6 +29,6 @@ class LocalRegistry:
         self.registered_recipies = list(recipies.keys())
 
     def execute(self, commands=None):
-        for command_config in commands:
-            command = GitCommand(command=command_config.get('name'), options=command_config.get('options'))
+        for command in commands:
+            command = GitCommand(command=command.name, options=command.options)
             command.execute()
