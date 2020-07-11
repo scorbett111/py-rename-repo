@@ -65,13 +65,13 @@ class CommandLineInterface:
             options_interface = OptionsInterface(options=list(self.options.values()))
             options_interface.add_arguments()
             option_values = options_interface.parse_arguments()
-            print(option_values)
             
             for option in option_values:
                 option_value = option_values.get(option)
                 if option_value is None:
                     option_value = self.options.get(option).get('default')
 
+                print(option, option_value)
                 self.options[option]['value'] = option_value
 
         return self
