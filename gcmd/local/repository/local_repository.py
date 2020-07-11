@@ -12,6 +12,7 @@ class LocalRepository:
         )
         self.remote_name = options.get('remote_name', default='origin')
         self.remote_branch = options.get('remote_branch', default='main')
+        print(self.remote_branch)
 
         if options.get('repo_subdirectory'):
             self.repo_path = os.path.join(
