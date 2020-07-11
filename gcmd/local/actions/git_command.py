@@ -23,8 +23,6 @@ class GitCommand:
                 raise execution_failure
 
         if self.hooks.get('on_success'):
-            print('EEEEE')
             for hook in self.hooks.get('on_success'):
-                print(hook.name)
-            #     self.repo.execute(command=hook.name)
+                self.repo.execute(command=hook.name)
 
