@@ -29,13 +29,10 @@ class OptionGroup(collections.Mapping):
 
     def __iter__(self):
         for option_name in self.options:
-            yield self.options.get(option_name)
+            yield option_name
 
     def __getitem__(self, option):
-        if type(option) == str:
-            return self.options.get(option).value
-        else:
-            return option.value
+        return self.options.get(option).value
 
     def get(self, option, default=None):
         result = self.options.get(option)
