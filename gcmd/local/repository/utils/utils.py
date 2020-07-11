@@ -1,4 +1,7 @@
-def execute_option_hooks(func):
+import functools
+
+def execute_option_hooks(func, **kwargs):
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         local_repository = args[0]
         print(local_repository)
