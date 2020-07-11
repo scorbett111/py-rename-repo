@@ -65,7 +65,7 @@
                 "branch"
             ],
             "hooks": {
-                "on_success": [
+                "on_failure": [
                     "pull"
                 ]
             }
