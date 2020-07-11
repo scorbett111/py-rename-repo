@@ -35,7 +35,8 @@
         "untracked": {
             "short_flag": "-u",
             "long_flag": "--untracked",
-            "requied": false,
+            "required": false,
+            "action": "store_true",
             "map": "untracked"
         }
     },
