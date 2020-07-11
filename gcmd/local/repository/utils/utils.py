@@ -16,7 +16,7 @@ def execute_option_hooks(options=None):
             pre_hooks = []
             for options in command_options:
                 if option.hooks:
-                    print(option.map,option.value)
+                    print(option.map,option.value, option.hooks)
                     print('AAAA')
                     for event in option.hooks:
                         print(event.event)
