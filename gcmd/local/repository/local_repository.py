@@ -64,6 +64,7 @@ class LocalRepository:
         if files:
             self._repo.index.add(files)
         elif untracked:
+            print('eEEEE')
             self._repo.get.add(U=True)
         else:
             self._repo.git.add(A=True)
