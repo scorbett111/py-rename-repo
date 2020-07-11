@@ -40,10 +40,6 @@ class LocalRepository:
 
     def execute(self, command=None):
 
-        for option in self.options:
-            if option.hooks and option.hooks['on_pre']:
-                print('EEEE')
-
         if command is None:
             raise Exception('Error: Command is not specified.')
 
