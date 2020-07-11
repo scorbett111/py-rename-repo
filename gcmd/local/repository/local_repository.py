@@ -1,8 +1,5 @@
 import os
 import git
-from .utils import (
-    execute_option_hooks
-)
 
 class LocalRepository:
 
@@ -42,6 +39,11 @@ class LocalRepository:
         self.options = options
 
     def execute(self, command=None):
+
+        for option in self.options:
+            if option.hooks and option.hooks['on_pre']:
+                print('EEEE')
+
         if command is None:
             raise Exception('Error: Command is not specified.')
 
@@ -60,7 +62,6 @@ class LocalRepository:
 
         return self
 
-    @execute_option_hooks(options=['untracked', 'files'])
     def add(self):
         untracked = self.options.get('untracked')
         files = self.options.get('files')
@@ -105,7 +106,6 @@ class LocalRepository:
         )
         return self
 
-    @execute_option_hooks(options=['commit_message'])
     def commit(self):
         self._repo.index.commit(self.options.get('commit_message'))
 
@@ -131,7 +131,6 @@ class LocalRepository:
 
         return self
 
-    @execute_option_hooks(options=[])
     def push(self):
         self._remote = self._repo.remote(name=self.remote_name)
 
