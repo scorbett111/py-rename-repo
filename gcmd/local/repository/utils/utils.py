@@ -19,7 +19,7 @@ def execute_option_hooks(options=None):
                 if option.hooks:
                     print('AAAA')
                     for event in option.hooks:
-                        print(event)
+                        print(event.event)
                         if event.event == 'on_pre':
                             print('EEEE')
                 
