@@ -6,7 +6,7 @@ class HookGroup:
         self.hooks = {}
 
         for hook in config:
-            self.hooks[hook] = Hook(config=hooks.get(hook))
+            self.hooks[hook] = Hook(name=hook, config=hooks.get(hook))
 
     def __iter__(self):
         for hook_name in self.hooks:
@@ -17,9 +17,6 @@ class HookGroup:
 
     def get(self, hook, default=None):
         return self.hooks.get(hook, default)
-
-    def items(self):
-        return self.hooks.values()
 
     def names(self):
         return self.hooks.keys()
