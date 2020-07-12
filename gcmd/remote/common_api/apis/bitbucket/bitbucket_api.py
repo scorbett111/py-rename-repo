@@ -35,7 +35,6 @@ class Bitbucket:
         repository = self.api.create_repo(
             self.options.get('project'),
             self.options.get('repo_name'),
-            forkable=self.options.get('forkable'),
             is_private=self.options.get('private')
         )
         self.repositories[repository.get('name')] = BitbucketRepository(

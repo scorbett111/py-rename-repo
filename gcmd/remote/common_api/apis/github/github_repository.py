@@ -15,7 +15,6 @@ class GithubRepository:
         self.id = repository.id
         self.name = repository.name
         self.description = repository.description
-        self.homepage = repository.homepage
         self.private = repository.private
         self.default_branch = branches[repository.default_branch]
         self.url = repository.clone_url
@@ -24,11 +23,22 @@ class GithubRepository:
         self.options = options
 
     def update_repository(self):
+        update_config = {}
         self.name = self.options.get('repo_name', self.name)
+        if self.name:
+            update_config['name'] = self.name
+
         self.description = self.options.get('repo_description', self.description)
-        self.homepage = self.options.get('repo_homepage', self.homepage)
+        if self.description:
+            update_config['description'] = self.description
+
         self.private = self.options.get('repo_privacy', self.private)
+        if self.private:
+            update_config['private'] = self.private
+
         self.default_branch = self.branches[self.options.get('repo_branch', self.default_branch)]
+        if self.default_branch:
+            update_config['default_branch'] = self.default_branch
 
         self.repository.edit(**self.options)
 
