@@ -2,7 +2,7 @@
 cryptography
 PyGitHub
 python-gitlab
-bitbucket-python
+atlassian-python-api
 python-dotenv
 ConfigArgParse
 pytest

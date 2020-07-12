@@ -1,12 +1,12 @@
-from gcmd.remote.services.github.github_service import (
-    GithubService
+from gcmd.remote.services.github import (
+    GithubAPI
 )
 from gcmd.remote.repository import (
     Collection,
     Repository
 )
 
-class Service:
+class CommonAPI:
     def __init__(self, service_name=None):
         
         if service_name is None:
@@ -19,7 +19,6 @@ class Service:
         self.service = None
         self.repositories = None
         self.selected_repository = None
-        self.type = 'target'
 
     def login(self, auth=None):
         self.registered_services.get(self.service_name)(

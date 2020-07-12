@@ -35,7 +35,7 @@ setup(
         'cryptography',
         'PyGitHub',
         'python-gitlab',
-        'bitbucket-python',
+        'atlassian-python-api',
         'python-dotenv',
         'gitpython'
 
