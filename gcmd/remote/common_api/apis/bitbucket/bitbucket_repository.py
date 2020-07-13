@@ -20,6 +20,7 @@ class BitbucketRepository:
         }
         self.api.update_url_store(
             key=self.name,
+            base='default',
             endpoint='repositories/{workspace}/{repository}'.format(
                 workspace=self.custom.get('workspace'),
                 repository=repository.get('slug')
@@ -64,7 +65,7 @@ class BitbucketRepository:
                     }
                 )
             
-            branches = self.api.get(key=self.name, endpoint='refs/branches')
+            branches = self.api.get(url=branches.get('next'))
         
         return self.branches
 

@@ -7,7 +7,7 @@ def http_handler(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
 
-        base_url_key = kwargs.get('base') 
+        base_url_key = kwargs.get('key', 'url') 
         base_url = args[0].url_store.get(base_url_key, 'default')
         endpoint = kwargs.get('endpoint')
 
@@ -16,7 +16,6 @@ def http_handler(func):
                 base_url=base_url,
                 endpoint=endpoint
             )
-
         else:
             kwargs['endpoint'] = base_url
 

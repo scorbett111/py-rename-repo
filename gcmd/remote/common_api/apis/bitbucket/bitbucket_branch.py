@@ -4,7 +4,8 @@ class BitbucketBranch:
         self.name = branch.get('name')
         self.api = config.get('api')
         self.api.update_url_store(
-            key=config.get('repo_name'),
+            key=self.name,
+            base=config.get('repo_name'),
             endpoint='refs/branches/{branch_name}'.format(branch_name=self.name)
         )
 
@@ -16,6 +17,6 @@ class BitbucketBranch:
         }
 
     def delete_branch(self):
-        self.api.delete()
+        self.api.delete(key=self.name)
 
         return self

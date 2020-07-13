@@ -27,9 +27,9 @@ class HttpSession:
             })
             self.session.auth = (auth.user, auth.password)
 
-    def update_url_store(self, key=None, endpoint=None):
+    def update_url_store(self, key=None, base=None, endpoint=None):
         self.url_store[key] = '{base_url}/{endpoint}'.format(
-            base_url=self.url_store.get(key, 'default'),
+            base_url=self.url_store.get(base, 'default'),
             endpoint=endpoint
         )
 
@@ -38,23 +38,23 @@ class HttpSession:
             del self.url_store[key]
 
     @http_handler
-    def get(self, base=None, endpoint=None):
+    def get(self, url=None, key=None, endpoint=None):
         return self.session.get(endpoint)
 
     @http_handler
-    def post(self, base=None, endpoint=None, data=None):
+    def post(self, url=None, key=None, endpoint=None, data=None):
         return self.session.post(
             endpoint,
             data=json.dumps(data)
         )
 
     @http_handler
-    def put(self, base=None, endpoint=None, data=None):
+    def put(self, url=None, key=None, endpoint=None, data=None):
         return self.session.put(
             endpoint,
             data=json.dumps(data)
         )
 
     @http_handler
-    def delete(self, base=None, endpoint=None):
+    def delete(self, url=None, key=None, endpoint=None):
         return self.session.delete()

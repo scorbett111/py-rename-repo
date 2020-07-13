@@ -39,7 +39,7 @@ class Bitbucket:
                 )
 
             
-            repositories = self.api.get(endpoint=request_url)
+            repositories = self.api.get(url=repositories.get('next'))
 
         return self.repositories
 
