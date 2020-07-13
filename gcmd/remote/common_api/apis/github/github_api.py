@@ -19,20 +19,48 @@ class Github:
         self.command = command.name
         self.options = command.options
         self.hooks = command.hooks
-        self.user = self.api.get_user()
-        self.repositories = GithubRepositoryCollection()
+        self.repositories = GithubRepositoryCollection(
+            options=self.options
+        )
+        self.custom = {
+            'user': self.api.get_user()
+        }
 
     def __iter__(self):
-        for repo in self.user.get_repos():
+        for repo in self.repositories:
             yield repo
 
     def __getitem__(self, repository_name):
         return self.repositories[repository_name]
 
+    def get_repositories(self):
+        repositories = self.custom.get('user').get_repos()
+        
+        for repository in repositories:
+            self.repositories[repository.name] = GithubRepository(
+                repository=repository,
+                options=self.options
+            )
+
+        return self.repositories
+
+    def get_repository(self):
+        repo_name = self.options.get('repo_name')
+        if repo_name in self.repositories.collection:
+            return self.repositories[repo_name]
+
+        repository = self.custom.get('user').get_repo()
+        self.repositories[repo_name] = GithubRepository(
+            repository=repository,
+            options=self.options
+        )
+
+        return self.repositories[repo_name]
+
     def create_repository(self):
         repo_name = self.options.get('repo_name')
         repo_description = self.options.get('repo_description')
-        self.repository = self.user.create_repo(
+        self.repository = self.custom.get('user').create_repo(
             name=repo_name,
             description=repo_description
         )
@@ -49,5 +77,11 @@ class Github:
                 options=self.options
             )
 
+        return self.repositories[repo_name]
+
+    def delete_repository(self):
+        repo_name = self.options.get('repo_name')
+        self.repositories[repo_name].delete()
+        self.repositories.delete(repo_name)
+
         return self
-        

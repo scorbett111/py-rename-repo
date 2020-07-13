@@ -35,9 +35,9 @@ setup(
         'cryptography',
         'PyGitHub',
         'python-gitlab',
-        'atlassian-python-api',
+        'requests_oauthlib',
         'python-dotenv',
-        'gitpython'
+        'gitpython''
 
     ],
     entry_points = {
