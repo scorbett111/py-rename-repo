@@ -37,7 +37,7 @@ setup(
         'python-gitlab',
         'requests_oauthlib',
         'python-dotenv',
-        'gitpython''
+        'gitpython'
 
     ],
     entry_points = {
