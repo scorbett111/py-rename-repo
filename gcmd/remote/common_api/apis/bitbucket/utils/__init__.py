@@ -1,1 +1,1 @@
-from .http import Http
+from .http_session import HttpSession

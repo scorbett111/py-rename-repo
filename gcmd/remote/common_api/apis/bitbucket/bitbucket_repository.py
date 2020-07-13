@@ -1,5 +1,3 @@
-import urllib
-import json
 from .bitbucket_branch import BitbucketBranch
 from .bitbucket_branch_collection import BitbucketBranchesCollection
 
@@ -18,16 +16,16 @@ class BitbucketRepository:
         )
         self.custom = {
             'slug': repository.get('slug'),
-            'base_url': urllib.parse.urljoin(
-                'https://bitbucket.org/api/2.0',
-                'repositories/{workspace}/{repository}'.format(
-                    workspace=self.custom.get('workspace'),
-                    repository=repository.get('slug')
-                )    
-            ),
             'workspace': repository.get('workspace').get('slug'),
         }
-
+        self.api.update_url_store(
+            key=self.name,
+            endpoint='repositories/{workspace}/{repository}'.format(
+                workspace=self.custom.get('workspace'),
+                repository=repository.get('slug')
+            )
+        )
+        
         self.branches = BitbucketBranchesCollection(
             options=options,
             config={
@@ -38,15 +36,11 @@ class BitbucketRepository:
         )
         self.options = options
 
-        default_branch = self.api.get(
-            urllib.parse.urljoin(
-                self.custom.get('base_url'),
-                repository.get('mainbranch').get('name')
-            )
-        ).json()
-
         self.default_branch = BitbucketBranch(
-            branch=default_branch,
+            branch=self.api.get(
+                key=self.name,
+                endpoint=repository.get('mainbranch').get('name')
+            ),
             options=self.options,
             config={
                 'api': self.api,
@@ -56,11 +50,7 @@ class BitbucketRepository:
         )
 
     def get_branches(self):
-        request_url = urllib.parse.urljoin(
-            self.custom.get('base_url'),
-            'refs/branches'
-        )
-        branches = self.api.get(request_url).json()
+        branches = self.api.get(key=self.name, endpoint='refs/branches')
 
         while(branches.get('next')):
             for branch in branches.get('values'):
@@ -74,20 +64,19 @@ class BitbucketRepository:
                     }
                 )
             
-            branches = self.api.get(request_url).json()
+            branches = self.api.get(key=self.name, endpoint='refs/branches')
         
         return self.branches
 
     def get_branch(self):
         repo_branch = self.options.get('repo_branch')
-        request_url = urllib.parse.urljoin(
-            self.custom.get('base_url'),
-            'refs/branches/{branch_name}'.format(branch_name=branch_name)
-        )
         if repo_branch is self.branches.collection:
             return self.branches[repo_branch]
 
-        branch = self.api.get(request_url).json()
+        branch = self.api.get(
+            key=self.name,
+            endpoint='refs/branches/{branch_name}'.format(branch_name=repo_branch)
+        )
 
         self.branches[repo_branch] = BitbucketBranch(
             branch=branch,
@@ -123,15 +112,12 @@ class BitbucketRepository:
                 'name': self.default_branch
             }
 
-        self.api.put(
-            self.custom.get('base_url'),
-            data=json.dumps(update_config)
-        )
+        self.api.put(key=self.name, data=update_config)
         
         return self
 
     def delete_repository(self):
-        self.api.delete(self.custom.get('base_url'))
+        self.api.delete(key=self.name)
 
         return self
 
@@ -151,12 +137,7 @@ class BitbucketRepository:
             }
         }
 
-        self.api.post(
-            '{base_url}/pullrequests'.format(
-                base_url=self.custom.get('base_url')
-            ),
-            data=json.dumps(merge_request)
-        )
+        self.api.post(key=self.name, endpoint='/pullrequests', data=merge_request)
 
         return self
 
@@ -172,13 +153,7 @@ class BitbucketRepository:
             }
         }
 
-        branch = self.api.post(
-            urllib.parse.urljoin(
-                self.custom.get('base_url'),
-                'refs/branches'
-            ),
-            data=json.dumps(branch_config)
-        ).json()
+        branch = self.api.post(key=self.name, endpoint='refs/branches', data=branch_config)
 
         self.branches[repo_branch] = BitbucketBranch(
             branch=branch,
@@ -191,3 +166,11 @@ class BitbucketRepository:
         )
 
         return self.branches[repo_branch]
+
+    def delete_branch(self):
+        repo_branch = self.options.get('repo_branch')
+        self.branches[repo_branch].delete()
+        self.branches.delete(repo_branch)
+        self.api.delete_url(key=repo_branch)
+
+        return self
